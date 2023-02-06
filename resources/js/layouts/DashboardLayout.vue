@@ -50,7 +50,7 @@
                                         >
                                         <img
                                             class="h-8 w-8 rounded-full"
-                                            :src="user.imageUrl"
+                                            src="https://cdn-icons-png.flaticon.com/512/4333/4333609.png"
                                             alt=""
                                         />
                                     </MenuButton>
@@ -121,7 +121,7 @@
                         <div class="flex-shrink-0">
                             <img
                                 class="h-10 w-10 rounded-full"
-                                :src="user.imageUrl"
+                                src="https://cdn-icons-png.flaticon.com/512/4333/4333609.png"
                                 alt=""
                             />
                         </div>
@@ -173,9 +173,10 @@ const router = useRouter();
 const user = computed(() => store.state.user.data);
 
 function logout() {
-    store.commit("logout");
-    router.push({
-        name: "login",
+    store.dispatch("logout").then(() => {
+        router.push({
+            name: "login",
+        });
     });
 }
 

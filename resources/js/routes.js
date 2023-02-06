@@ -5,6 +5,8 @@ import Register from "./views/Register.vue";
 import DashboardLayout from "./layouts/DashboardLayout.vue";
 import AuthLayout from "./layouts/AuthLayout.vue";
 import Surveys from "./views/Surveys.vue";
+import SurveyCreate from "./views/SurveyCreate.vue";
+import SurveyView from "./views/SurveyView.vue";
 import store from "./store";
 
 export const routes = [
@@ -23,6 +25,16 @@ export const routes = [
                 path: "surveys",
                 name: "surveys",
                 component: Surveys,
+            },
+            {
+                path: "survey-create",
+                name: "survey-create",
+                component: SurveyCreate,
+            },
+            {
+                path: "survey-view/:id",
+                name: "survey-view",
+                component: SurveyView,
             },
         ],
         meta: {

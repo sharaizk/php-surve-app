@@ -20,7 +20,7 @@
             </router-link>
         </p>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    <form @submit.prevent="register" class="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div class="-space-y-px rounded-md shadow-sm">
             <div>
@@ -31,6 +31,7 @@
                     type="text"
                     autocomplete="name"
                     required=""
+                    v-model="user.name"
                     class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="Full Name"
                 />
@@ -43,6 +44,7 @@
                     type="email"
                     autocomplete="email"
                     required=""
+                    v-model="user.email"
                     class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="Email address"
                 />
@@ -55,6 +57,7 @@
                     type="password"
                     autocomplete="current-password"
                     required=""
+                    v-model="user.password"
                     class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="Password"
                 />
@@ -68,6 +71,7 @@
                     name="confirm-password"
                     type="password"
                     autocomplete="current-password"
+                    v-model="user.password_confirmation"
                     required=""
                     class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="Confirm  Password"
@@ -94,4 +98,22 @@
 
 <script setup>
 import { LockClosedIcon } from "@heroicons/vue/20/solid";
+import store from "../store";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const user = {
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+};
+
+async function register(e) {
+    console.log(user)
+    try {
+        await store.dispatch("register", user);
+        // router.push({ name: "dashboard-layout" });
+    } catch (e) {}
+}
 </script>
